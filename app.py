@@ -62,16 +62,26 @@ SCORE_LABELS_VI = {
 }
 
 DESCRIPTIONS = {
-    "Grey": "**Grey** (Powerful, Mysterious, Provocative): People with Grey personality value solitude, privacy, and mystery. You keep people guessing and never let anyone too close. You enjoy doing things your own way and don’t care about others’ judgment. This color suits those who are bold, yet calm, and prefer to live on the edge without fear.",
-    "Orange": "**Orange** (Optimistic, Friendly, Perceptive): As an Orange, you're warm and joyful. You love small, close gatherings and deeply value human connection. You see the best in people and forgive easily. Romantic at heart, you love deeply and hurt deeply, always hopeful for future connections.",
-    "Green": "**Green** (Peaceful, Serene, Accommodating): Green personalities are calm and peaceful. You prefer a stress-free life, enjoy comfort, and avoid confrontation. You allow others to find peace without disturbing your own. You’re easygoing, attractive in your calmness, but may sometimes overlook things that need serious attention.",
-    "Crimson": "**Crimson** (Adventurous, Bold, Direct): People with Crimson energy are daring and passionate. You love excitement and being in the spotlight. You're assertive, outspoken, and energetic. Popularity and achievement are important to you. You thrive in fast-moving environments and enjoy being admired.",
-    "Purple": "**Purple** (Creative, Expressive, Emotive): Purple personalities are artistic and thoughtful. You live life with imagination and depth, often thinking differently from others. You love culture, philosophy, and art. You’re expressive, open to possibilities, and proud of your unique lifestyle.",
-    "Blue": "**Blue** (Dependable, Practical, Directive): Blue types are trustworthy and organized. You follow rules, keep promises, and value honesty. You stick to routines, make sacrifices to reach goals, and always support your loved ones. Discipline and responsibility define you, even if it means missing out on fun sometimes."
+    "Grey": "**Grey** (**Powerful**, **Mysterious**, **Provocative**): People with Grey personality value **solitude**, **privacy**, and **mystery**. You keep people guessing and never let anyone too close. You enjoy doing things your own way and don’t care about others’ judgment. This color suits those who are **bold**, yet **calm**, and prefer to live on the edge without fear.",
+    "Orange": "**Orange** (**Optimistic**, **Friendly**, **Perceptive**): As an Orange, you're **warm** and **joyful**. You love small, close gatherings and deeply value human connection. You see the best in people and **forgive** easily. **Romantic** at heart, you love deeply and hurt deeply, always **hopeful** for future connections.",
+    "Green": "**Green** (**Peaceful**, **Serene**, **Accommodating**): Green personalities are **calm** and **peaceful**. You prefer a **stress-free** life, enjoy **comfort**, and avoid confrontation. You allow others to find peace without disturbing your own. You’re **easygoing**, attractive in your **calmness**, but may sometimes overlook things that need serious attention.",
+    "Crimson": "**Crimson** (**Adventurous**, **Bold**, **Direct**): People with Crimson energy are **daring** and **passionate**. You love **excitement** and being in the **spotlight**. You're **assertive**, **outspoken**, and **energetic**. **Popularity** and **achievement** are important to you. You **thrive** in fast-moving environments and enjoy being **admired**.",
+    "Purple": "**Purple** (**Creative**, **Expressive**, **Emotive**): Purple personalities are **artistic** and **thoughtful**. You live life with **imagination** and **depth**, often thinking **differently** from others. You love **culture**, **philosophy**, and **art**. You’re **expressive**, open to possibilities, and proud of your **unique** lifestyle.",
+    "Blue": "**Blue** (**Dependable**, **Practical**, **Directive**): Blue types are **trustworthy** and **organized**. You follow rules, keep promises, and value **honesty**. You stick to **routines**, make **sacrifices** to reach goals, and always support your loved ones. **Discipline** and **responsibility** define you, even if it means missing out on fun sometimes."
 }
 
 # =================== STREAMLIT UI ===================
-st.set_page_config(page_title="Personality Color Quiz", page_icon="🎨")
+st.set_page_config(page_title="Personality Color Quiz", page_icon="🎨", layout="centered")
+
+# Add custom font
+st.markdown("""
+    <style>
+    @import url('https://fonts.googleapis.com/css2?family=Nunito&display=swap');
+    html, body, [class*="css"]  {
+        font-family: 'Nunito', sans-serif;
+    }
+    </style>
+""", unsafe_allow_html=True)
 st.title("🎨 Personality Color Quiz")
 
 language = st.radio("Chọn ngôn ngữ / Choose your language:", LANGUAGE_OPTIONS)
