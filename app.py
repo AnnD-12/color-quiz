@@ -1,7 +1,9 @@
 import streamlit as st
 
 # =================== CONFIG ===================
-QUESTIONS = [
+LANGUAGE_OPTIONS = ["Tiếng Việt", "English"]
+
+QUESTIONS_VI = [
     ("Tôi thường giữ khoảng cách với người khác và không thích chia sẻ nhiều.", "Grey"),
     ("Tôi thường nhận được lời mời từ người khác mà không cần chủ động trước.", "Grey"),
     ("Tôi cảm thấy thoải mái khi ở một mình và thích khám phá theo cách riêng.", "Grey"),
@@ -22,7 +24,36 @@ QUESTIONS = [
     ("Tôi thấy hài lòng khi được làm việc theo quy trình rõ ràng.", "Blue"),
 ]
 
+QUESTIONS_EN = [
+    ("I usually keep distance from others and don’t like to share much.", "Grey"),
+    ("People often invite me to events, even when I don’t ask.", "Grey"),
+    ("I enjoy being alone and doing things in my own way.", "Grey"),
+    ("I believe that everyone has something good inside.", "Orange"),
+    ("I feel happy when I help or support other people.", "Orange"),
+    ("I easily fall in love and often think about my past love.", "Orange"),
+    ("I don’t like fighting or arguing with others.", "Green"),
+    ("I like to do things in a calm and easy way.", "Green"),
+    ("I don’t care much about competition or standing out.", "Green"),
+    ("I enjoy trying new things and exciting experiences.", "Crimson"),
+    ("I’m often the first person to speak or decide in a group.", "Crimson"),
+    ("I like to be noticed and don’t mind showing myself.", "Crimson"),
+    ("I often think in creative or different ways.", "Purple"),
+    ("I love art and often find inspiration in small things.", "Purple"),
+    ("I feel I belong to a unique and colorful world.", "Purple"),
+    ("I like to keep things organized and always finish my work on time.", "Blue"),
+    ("I am loyal and reliable in relationships.", "Blue"),
+    ("I feel good when I work with clear steps and plans.", "Blue"),
+]
+
 SCORE_LABELS = {
+    "Strongly disagree": -2,
+    "Disagree": -1,
+    "Neutral / Not sure": 0,
+    "Agree": 1,
+    "Strongly agree": 2
+}
+
+SCORE_LABELS_VI = {
     "Hoàn toàn không đồng ý": -2,
     "Không đồng ý": -1,
     "Trung lập": 0,
@@ -42,7 +73,17 @@ DESCRIPTIONS = {
 # =================== STREAMLIT UI ===================
 st.set_page_config(page_title="Personality Color Quiz", page_icon="🎨")
 st.title("🎨 Personality Color Quiz")
-st.markdown("Hãy chọn mức độ phù hợp với bạn nhất cho mỗi câu hỏi bên dưới. Sau đó, nhấn **'Xem kết quả'** để khám phá màu sắc cá nhân của bạn!")
+
+language = st.radio("Chọn ngôn ngữ / Choose your language:", LANGUAGE_OPTIONS)
+
+if language == "English":
+    QUESTIONS = QUESTIONS_EN
+    LABELS = list(SCORE_LABELS.keys())
+    SCORE_MAP = SCORE_LABELS
+else:
+    QUESTIONS = QUESTIONS_VI
+    LABELS = list(SCORE_LABELS_VI.keys())
+    SCORE_MAP = SCORE_LABELS_VI
 
 responses = []
 
@@ -50,18 +91,18 @@ with st.form("quiz_form"):
     for idx, (question, _) in enumerate(QUESTIONS):
         answer = st.radio(
             f"{idx + 1}. {question}",
-            list(SCORE_LABELS.keys()),
+            LABELS,
             key=f"q{idx}"
         )
         responses.append(answer)
-    submitted = st.form_submit_button("🔍 Xem kết quả")
+    submitted = st.form_submit_button("🔍 Xem kết quả / See Result")
 
 # =================== SCORING ===================
 if submitted:
     scores = {color: 0 for color in DESCRIPTIONS.keys()}
     for idx, answer in enumerate(responses):
         _, color = QUESTIONS[idx]
-        scores[color] += SCORE_LABELS[answer]
+        scores[color] += SCORE_MAP[answer]
 
     top_color = max(scores, key=scores.get)
 
